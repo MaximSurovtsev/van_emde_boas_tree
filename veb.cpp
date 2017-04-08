@@ -3,6 +3,11 @@
 
 using namespace std;
 
+#define veb_tree VEBTree
+#define min getMin
+#define max getMax
+
+
 template <unsigned int S>
 struct veb_tree: AbstractVEBTree<S>
 {
@@ -165,17 +170,7 @@ struct veb_tree: AbstractVEBTree<S>
 	{
 		return mx;
 	}
-
-	type getMin() const
-	{
-		return min();
-	}
-
-	type getMax() const
-	{
-		return max();
-	}
-
+	
 	void add(type a)
 	{
 		if (!contains(a))
@@ -202,17 +197,17 @@ struct veb_tree: AbstractVEBTree<S>
 		}
 	}
 
-	type collect(type h, type l) const
+	static type collect(type h, type l)
 	{
 		return (h << ((S + 1) / 2)) + l;
 	}
 	
-	type high(type a) const
+	static type high(type a)
 	{
 		return a >> ((S + 1) / 2);
 	}
 
-	type low(type a) const
+	static type low(type a)
 	{
 		return a - (high(a) << ((S + 1) / 2));
 	}
@@ -303,16 +298,6 @@ struct veb_tree<1>: AbstractVEBTree<1>
 		if (mx != NO)
 			return mx;
 		return mn;
-	}
-
-	type getMin() const
-	{
-		return min();
-	}
-
-	type getMax() const
-	{
-		return max();
 	}
 
 	void add(type a)
